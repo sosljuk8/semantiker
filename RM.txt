@@ -1,0 +1,63 @@
+ENT
+
+go run -mod=mod entgo.io/ent/cmd/ent new Tune Category
+
+go generate ./ent
+
+_ "github.com/go-sql-driver/mysql"
+_ "github.com/mattn/go-sqlite3"
+
+
+
+
+
+zero steps
+
+go get -u github.com/zeromicro/go-zero
+
+GO111MODULE=on go get -u github.com/zeromicro/go-zero/tools/goctl
+
+create the API file, like greet.api, you can install the plugin of goctl in vs code, api syntax is supported.
+
+goctl api -o tunes.api
+
+type Request struct {
+  Name string `path:"name,options=you|me"` // parameters are auto validated
+}
+
+type Response struct {
+  Message string `json:"message"`
+}
+
+service greet-api {
+  @handler GreetHandler
+  get /greet/from/:name(Request) returns (Response);
+}
+
+
+
+goctl api go -api tunes.api -dir .
+
+//cd greet
+go mod init
+go mod tidy
+
+go run tunes.go -f etc/tunes-api.yaml
+
+curl -i http://localhost:8888/greet/from/you
+
+
+
+
+///////////////////// exelize //////////////////////////////////////////////////
+
+"github.com/xuri/excelize/v2"
+
+https://xuri.me/excelize/ru/base/installation.html#NewFile
+https://xuri.me/excelize/ru/base/installation.html
+
+
+
+//////////////////////////////////////////////////////////
+
+
